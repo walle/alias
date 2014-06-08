@@ -8,26 +8,28 @@ package `alias` adds alias/redirection to Martini apps using regular expressions
 
 ## Usage
 
-    package main
+```go
+package main
 
-    import (
-        "github.com/walle/alias"
-        "github.com/go-martini/martini"
-    )
+import (
+    "github.com/walle/alias"
+    "github.com/go-martini/martini"
+)
 
-    func main() {
-        m := martini.Classic()
+func main() {
+    m := martini.Classic()
 
-        alias.Add("^/my/path/to/rewrite", "/my/path", alias.SERVE)
-        alias.Add("^/my/path/to/redirect", "/my/path", alias.REDIRECT)
-        m.Use(alias.Handler())
+    alias.Add("^/my/path/to/rewrite", "/my/path", alias.SERVE)
+    alias.Add("^/my/path/to/redirect", "/my/path", alias.REDIRECT)
+    m.Use(alias.Handler())
 
-        m.Get("/**", func(request *http.Request) string {
-            return "Hello " + request.URL.Path
-        })
+    m.Get("/**", func(request *http.Request) string {
+        return "Hello " + request.URL.Path
+    })
 
-        m.Run()
-    }
+    m.Run()
+}
+```
 
 ## Authors
 
